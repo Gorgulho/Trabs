@@ -43,11 +43,11 @@ class EventsController extends AppController
             $event = $this->Events->patchEntity($event, $this->request->data);
             //die(debug($this->Events->save($event)));
             if ($this->Events->save($event)) {
-                $this->Flash->success(__('The evento has been saved.'));
+                $this->Flash->success(__('O evento foi salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The evento could not be saved. Please, try again.'));
+            $this->Flash->error(__('Não foi possivel gravar o Evento. Tente de novo.'));
         }
         $this->loadModel('Organizers');
         $this->set('organizers',$this->Organizers->find('list'));
@@ -66,11 +66,11 @@ class EventsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($this->Events->save($event)) {
-                $this->Flash->success(__('The evento has been saved.'));
+                $this->Flash->success(__('O evento foi salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The evento could not be saved. Please, try again.'));
+            $this->Flash->error(__('Não foi possivel gravar o Evento. Tente de novo.'));
         }
         $this->loadModel('Organizers');
         $this->set('organizers',$this->Organizers->find('list'));
@@ -86,9 +86,9 @@ class EventsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $event = $this->Events->get($id);
         if ($this->Events->delete($event)) {
-            $this->Flash->success(__('The evento has been deleted.'));
+            $this->Flash->success(__('Evento eleminado com sucesso.'));
         } else {
-            $this->Flash->error(__('The evento could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Não foi possivel eleminar o Evento. Tente de novo..'));
         }
 
         return $this->redirect(['action' => 'index']);
