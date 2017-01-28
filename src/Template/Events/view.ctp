@@ -34,5 +34,9 @@
             <th scope="row"><?= __('Hora Evento') ?></th>
             <td><?= h($event->hora_evento) ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Evento validado') ?></th>
+            <td><?= h($event->validate) ?></td>
+        </tr>
     </table>
 </div>
