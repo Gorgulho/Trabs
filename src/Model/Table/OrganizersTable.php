@@ -6,15 +6,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/*
- * Organizers Model
- */
 class OrganizersTable extends Table
 {
 
-    /*
-     * Initialize method
-     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -22,15 +16,10 @@ class OrganizersTable extends Table
         $this->table('organizers');
         $this->displayField('nome_organizador');
         $this->primaryKey('id');
+        //relação com a tabela Events
         $this->hasMany('Events');
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
     public function validationDefault(Validator $validator)
     {
         $validator
