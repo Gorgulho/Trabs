@@ -22,15 +22,11 @@ class EventsTable extends Table
         $this->table('events');
         $this->displayField('id');
         $this->primaryKey('id');
+        //relação com a tabela organizers
         $this->belongsTo('Organizers');
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
+    //validações
     public function validationDefault(Validator $validator)
     {
         $validator
