@@ -29,7 +29,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <?php if(loggedIn) : ?>
+                <?php if($loggedIn) : ?>
                 <li><?= $this->Html->link('Logout', ['controller' => 'users', 'action' => 'logout']) ?></li>
                 <?php else : ?>
                 <li><?= $this->Html->link('Registo', ['controller' => 'users', 'action' => 'register']) ?></li>
