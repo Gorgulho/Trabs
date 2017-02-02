@@ -1,6 +1,6 @@
 <?php
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Organização de Eventos';
 ?>
 <!DOCTYPE html>
 <html>

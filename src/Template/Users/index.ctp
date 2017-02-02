@@ -3,6 +3,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Novo User'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('Listar Eventos'), ['controller' => 'Events', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Listar Organizadores'), ['controller' => 'Organizers', 'action' => 'index']) ?></li>
 
     </ul>
 </nav>
