@@ -3,31 +3,16 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Organizers Controller
- *
- * @property \App\Model\Table\OrganizersTable $Organizers
- */
 class OrganizersController extends AppController
 {
 
     public $paginate = [
-        'limit' => 4,
+        'limit' => 4, //limite de inscrinções por cada pagina do paginate
         'order' => [
-            'Articles.title' => 'asc'
+            'Articles.title' => 'asc' //metedo utilizado para a organização das incrinções 
         ]
     ];
 
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('Paginator');
-    }
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
     public function index()
     {
         $organizers = $this->paginate($this->Organizers);
@@ -36,13 +21,6 @@ class OrganizersController extends AppController
         $this->set('_serialize', ['organizers']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Organizer id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $organizer = $this->Organizers->get($id, [
@@ -53,11 +31,6 @@ class OrganizersController extends AppController
         $this->set('_serialize', ['organizer']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $organizer = $this->Organizers->newEntity();
@@ -75,13 +48,6 @@ class OrganizersController extends AppController
         $this->set('_serialize', ['organizer']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Organizer id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $organizer = $this->Organizers->get($id, [
@@ -101,13 +67,6 @@ class OrganizersController extends AppController
         $this->set('_serialize', ['organizer']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Organizer id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

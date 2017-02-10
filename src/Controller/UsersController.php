@@ -6,17 +6,12 @@ use Cake\Event\Event;
 class UsersController extends AppController
 {
     public $paginate = [
-        'limit' => 3,
+        'limit' => 3, //limite de inscrinções por cada pagina do paginate
         'order' => [
-            'Articles.title' => 'asc'
+            'Articles.title' => 'asc' //metedo utilizado para a organização das incrinções 
         ]
     ];
 
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('Paginator');
-    }
 
     //função relativa ao index dos users
     public function index()

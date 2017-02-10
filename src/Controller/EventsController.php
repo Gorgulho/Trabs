@@ -9,17 +9,12 @@ use App\Controller\AppController;
 class EventsController extends AppController
 {
     public $paginate = [
-        'limit' => 4,
+        'limit' => 4, //limite de inscrinções por cada pagina do paginate
         'order' => [
-            'Articles.title' => 'asc'
+            'Articles.title' => 'asc' //metedo utilizado para a organização das incrinções 
         ]
     ];
 
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('Paginator');
-    }
     /*
      * Index method
      */
