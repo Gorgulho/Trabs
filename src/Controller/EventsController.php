@@ -8,7 +8,18 @@ use App\Controller\AppController;
  */
 class EventsController extends AppController
 {
+    public $paginate = [
+        'limit' => 4,
+        'order' => [
+            'Articles.title' => 'asc'
+        ]
+    ];
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
     /*
      * Index method
      */
