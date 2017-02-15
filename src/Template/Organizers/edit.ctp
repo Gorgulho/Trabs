@@ -4,12 +4,11 @@
         <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $organizer->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $organizer->id)]
+                ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $organizer->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Organizers'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Listar Organizadores'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Listar Eventos'), ['controller' => 'Events', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="organizers form large-9 medium-8 columns content">

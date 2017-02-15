@@ -47,7 +47,6 @@ class EventsController extends AppController
         $event = $this->Events->newEntity();
         if ($this->request->is('post')) {
             $event = $this->Events->patchEntity($event, $this->request->data);
-            //die(debug($this->Events->save($event)));
             if ($this->Events->save($event)) {
                 $this->Flash->success(__('O evento foi salvo com sucesso.'));
 

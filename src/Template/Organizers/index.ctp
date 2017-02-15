@@ -14,6 +14,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nome_organizador') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nome_empresa') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -21,8 +22,9 @@
             <?php foreach ($organizers as $organizer): ?>
             <tr>
                 <td><?= $this->Number->format($organizer->id) ?></td>
-                <td><?= h($organizer->nome_organizador) ?></td>
-                <td><?= h($organizer->nome_empresa) ?></td>
+                <td><?= $organizer->nome_organizador ?></td>
+                <td><?= $organizer->nome_empresa ?></td>
+                <td><?= $this->Html->image($organizer->image, array('alt' => 'imagem de perfil', "width" => "50" ,"height" => "50" )); ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $organizer->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $organizer->id]) ?>

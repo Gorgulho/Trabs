@@ -35,10 +35,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Utilizador guardado com sucesso'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('Não foi possivel salvar utilizador. Por favor tente mais tarde.'));
             }
         }
         $this->set(compact('user'));
@@ -53,10 +53,10 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Utilizador guardado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('Não foi possivel salvar utilizador. Por favor tente mais tarde.'));
             }
         }
         $this->set(compact('user'));
@@ -68,9 +68,9 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Utilizador eleminado com sucesso.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Não foi possivel eleminar utilizador. Por favor tente mais tarde.'));
         }
         return $this->redirect(['action' => 'index']);
     }
@@ -89,7 +89,7 @@ class UsersController extends AppController
     // Logout
     public function logout(){
          $this->Flash->success('Você fez logout');
-         return $this->redirect($this->Auth->logout());
+         return $this->redirect($this->Auth->logout()); //desliga a sessão do utilizador e redireciona-o para o login
     }
     // Registo
     public function register(){
@@ -106,8 +106,8 @@ class UsersController extends AppController
         $this->set(compact('user'));
         $this->set('_serialzie', ['user']);
     }
-    // Para permitir a entrada de guest users na página de registo
+    
     public function beforeFilter(Event $event){
-        $this->Auth->allow(['register']);
+        $this->Auth->allow(['register']);// Para permitir a entrada de guest users na página de registo
     }
 }

@@ -24,6 +24,8 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($organizer->id) ?></td>
         </tr>
+        <th scope="row"><?= __('Image') ?></th>
+            <td><?= $this->Html->image($organizer->image, array('alt' => 'imagem de perfil', "width" => "50" ,"height" => "50" )); ?></td>
     </table>
     <div class="related">
         <h4><?= __('Related Events') ?></h4>
