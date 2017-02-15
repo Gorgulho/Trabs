@@ -25,7 +25,7 @@
             <td><?= $this->Html->image($organizer->image, array('alt' => 'imagem de perfil', "width" => "100" ,"height" => "100" )); ?></td>
     </table>
     <div class="related">
-        <h4><?= __('Related Events') ?></h4>
+        <h4><?= __('Eventos Relacionados') ?></h4>
         <?php if (!empty($organizer->events)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
