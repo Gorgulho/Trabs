@@ -2,8 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editar Evento'), ['action' => 'edit', $event->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Evento'), ['action' => 'delete', $event->id], ['confirm' => __('Tem a certeza que quer eliminar # {0}?', $event->id)]) ?> </li>
-        <li><?= $this->Html->link(__('Listar Eventos'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Evento'), ['action' => 'delete', $event->id], ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $event->id)]) ?> </li>
         <li><?= $this->Html->link(__('Novo Evento'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>

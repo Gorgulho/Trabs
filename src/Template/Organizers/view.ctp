@@ -1,12 +1,9 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Organizer'), ['action' => 'edit', $organizer->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Organizer'), ['action' => 'delete', $organizer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $organizer->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Organizers'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Organizer'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Novo Organizador'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Edit Organizador'), ['action' => 'edit', $organizer->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Organizador'), ['action' => 'delete', $organizer->id], ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $organizer->id)]) ?> </li>
     </ul>
 </nav>
 <div class="organizers view large-9 medium-8 columns content">
@@ -25,7 +22,7 @@
             <td><?= $this->Number->format($organizer->id) ?></td>
         </tr>
         <th scope="row"><?= __('Image') ?></th>
-            <td><?= $this->Html->image($organizer->image, array('alt' => 'imagem de perfil', "width" => "50" ,"height" => "50" )); ?></td>
+            <td><?= $this->Html->image($organizer->image, array('alt' => 'imagem de perfil', "width" => "100" ,"height" => "100" )); ?></td>
     </table>
     <div class="related">
         <h4><?= __('Related Events') ?></h4>
