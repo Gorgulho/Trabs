@@ -51,6 +51,8 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
+    $routes->extensions(['json']);
+    $routes->resources('Recipes');
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */

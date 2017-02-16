@@ -4,11 +4,17 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-
+use Cake\I18N\I18N;
 
 class AppController extends Controller
 {
 
+    public function traducao(){
+        if($this->request->is('post')){  
+            $locale = $this->request->data('locale');
+            I18n::locale($locale);
+        }
+    }
     
     public function initialize()
     {

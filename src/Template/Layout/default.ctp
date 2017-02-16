@@ -30,6 +30,9 @@ $cakeDescription = 'Organização de Eventos';
         <div class="top-bar-section">
             <ul class="right">
                 <?php if($loggedIn) : ?>
+                <li><?= $this->Html->link(__('Organizadores'), ['controller' => 'Organizers', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('Utilizadores'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('Eventos'), ['controller' => 'Events', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link('Logout', ['controller' => 'users', 'action' => 'logout']) ?></li>
                 <?php else : ?>
                 <li><?= $this->Html->link('Registo', ['controller' => 'users', 'action' => 'register']) ?></li>

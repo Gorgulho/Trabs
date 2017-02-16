@@ -2,37 +2,30 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Utility\Text;
 
-/**
- * Organizers Controller
- *
- * @property \App\Model\Table\OrganizersTable $Organizers
- */
 class OrganizersController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
+    public $paginate = [
+        'limit' => 4, //limite de inscrinções por cada pagina do paginate
+        'order' => [
+            'Articles.title' => 'asc' //metedo utilizado para a organização das incrinções 
+        ]
+    ];
+
     public function index()
     {
+        $this->traducao();
         $organizers = $this->paginate($this->Organizers);
 
         $this->set(compact('organizers'));
         $this->set('_serialize', ['organizers']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Organizer id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
+        $this->traducao();
         $organizer = $this->Organizers->get($id, [
             'contain' => ['Events']
         ]);
@@ -41,69 +34,66 @@ class OrganizersController extends AppController
         $this->set('_serialize', ['organizer']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
+        $this->traducao();
         $organizer = $this->Organizers->newEntity();
-        if ($this->request->is('post')) {
-            $organizer = $this->Organizers->patchEntity($organizer, $this->request->data);
-            if ($this->Organizers->save($organizer)) {
-                $this->Flash->success(__('The organizer has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The organizer could not be saved. Please, try again.'));
+        if($this->request->is('post')){ //espera por um pedido POST
+            $image = $this->request->data('image'); //recebe o valor do campo de upload (image)
+            $extension = pathinfo($image['name'], PATHINFO_EXTENSION); //obtem a extensao do ficheiro
+            $image['name'] = Text::uuid($image['name']).'.'.$extension; //transforma o nome em uma string
+            if(move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/uploads/' . $image['name'])){ //Verifica se o ficheiro foi movido com sucesso 
+                $organizer = $this->Organizers->patchEntity($organizer, $this->request->data()); //preenche a entidade com os valores enviados
+                $organizer->image = 'uploads/' . $image['name']; //guarda o nome e caminho do ficheiro
+                if($this->Organizers->save($organizer)){ //valida se foi tudo salvo com sucesso
+                    $this->redirect(['action' => 'index']); //redireciona para o index
+                }
+                else{
+                    $this->Flash->error('Nao foi possivel guardar o utilizador'); //mensagem de erro
+                }
             }
         }
         $this->set(compact('organizer'));
         $this->set('_serialize', ['organizer']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Organizer id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
+        $this->traducao();
         $organizer = $this->Organizers->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $organizer = $this->Organizers->patchEntity($organizer, $this->request->data);
+            $image = $this->request->data('image'); //recebe o valor do campo de upload (image)
+            $extension = pathinfo($image['name'], PATHINFO_EXTENSION); //obtem a extensao do ficheiro
+            $image['name'] = Text::uuid($image['name']).'.'.$extension; //transforma o nome em uma string
+            if(move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/uploads/' . $image['name'])){ //Verifica se o ficheiro foi movido com sucesso 
+                $organizer = $this->Organizers->patchEntity($organizer, $this->request->data()); //preenche a entidade com os valores enviados
+                $organizer->image = 'uploads/' . $image['name']; //guarda o nome e caminho do ficheiro 
+            }
             if ($this->Organizers->save($organizer)) {
-                $this->Flash->success(__('The organizer has been saved.'));
+                $this->Flash->success(__('Organizador salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The organizer could not be saved. Please, try again.'));
+                $this->Flash->error(__('Imposivel guardar o organizador.'));
             }
+            
         }
         $this->set(compact('organizer'));
         $this->set('_serialize', ['organizer']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Organizer id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->traducao();
+        $this->request->allowMethod(['post', 'delete']);//elemina nesta linha
         $organizer = $this->Organizers->get($id);
-        if ($this->Organizers->delete($organizer)) {
-            $this->Flash->success(__('The organizer has been deleted.'));
+        if ($this->Organizers->delete($organizer)) { //validação do delete
+            $this->Flash->success(__('Organizador eleminado com sucesso.'));
         } else {
-            $this->Flash->error(__('The organizer could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Impossivel eleminar organizador. Tente de novo.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -2,18 +2,17 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Novo Organizador'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Listar Eventos'), ['controller' => 'Events', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Listar Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="organizers index large-9 medium-8 columns content">
-    <h3><?= __('Organizers') ?></h3>
+    <h3><?= __('Organizadores') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nome_organizador') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nome_empresa') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -21,25 +20,21 @@
             <?php foreach ($organizers as $organizer): ?>
             <tr>
                 <td><?= $this->Number->format($organizer->id) ?></td>
-                <td><?= h($organizer->nome_organizador) ?></td>
-                <td><?= h($organizer->nome_empresa) ?></td>
+                <td><?= $organizer->nome_organizador ?></td>
+                <td><?= $organizer->nome_empresa ?></td>
+                <td><?= $this->Html->image($organizer->image, array('alt' => 'imagem de perfil', "width" => "50" ,"height" => "50" )); ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $organizer->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $organizer->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $organizer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $organizer->id)]) ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $organizer->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $organizer->id], ['confirm' => __('Tem a certeza de que quer eleminar # {0}?', $organizer->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+        <?php echo $this->element('paginate'); // a chmar o elemento do paginate?>
+    <br>
+    <?php
+        echo $this->element('footer'); // a chamar o elemente com as traduções
+    ?>
 </div>
