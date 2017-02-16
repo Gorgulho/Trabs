@@ -16,6 +16,7 @@ class OrganizersController extends AppController
 
     public function index()
     {
+        $this->traducao();
         $organizers = $this->paginate($this->Organizers);
 
         $this->set(compact('organizers'));
@@ -24,6 +25,7 @@ class OrganizersController extends AppController
 
     public function view($id = null)
     {
+        $this->traducao();
         $organizer = $this->Organizers->get($id, [
             'contain' => ['Events']
         ]);
@@ -34,19 +36,20 @@ class OrganizersController extends AppController
 
     public function add()
     {
+        $this->traducao();
         $organizer = $this->Organizers->newEntity();
         if($this->request->is('post')){ //espera por um pedido POST
             $image = $this->request->data('image'); //recebe o valor do campo de upload (image)
             $extension = pathinfo($image['name'], PATHINFO_EXTENSION); //obtem a extensao do ficheiro
             $image['name'] = Text::uuid($image['name']).'.'.$extension; //transforma o nome em uma string
-            if(move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/uploads/' . $image['name'])){ //Verifica se o ficheiro foi movido com sucesso para outra pasta
+            if(move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/uploads/' . $image['name'])){ //Verifica se o ficheiro foi movido com sucesso 
                 $organizer = $this->Organizers->patchEntity($organizer, $this->request->data()); //preenche a entidade com os valores enviados
-                $organizer->image = 'uploads/' . $image['name']; //guarda o nome e caminho do ficheiro na patch entity
-                if($this->Organizers->save($organizer)){ //valida os dados
-                    $this->redirect(['action' => 'index']); //redireciona para a acao index
+                $organizer->image = 'uploads/' . $image['name']; //guarda o nome e caminho do ficheiro
+                if($this->Organizers->save($organizer)){ //valida se foi tudo salvo com sucesso
+                    $this->redirect(['action' => 'index']); //redireciona para o index
                 }
                 else{
-                    $this->Flash->error('Nao foi possivel guardar a carta'); //envia uma mensagem de erro
+                    $this->Flash->error('Nao foi possivel guardar o utilizador'); //mensagem de erro
                 }
             }
         }
@@ -56,6 +59,7 @@ class OrganizersController extends AppController
 
     public function edit($id = null)
     {
+        $this->traducao();
         $organizer = $this->Organizers->get($id, [
             'contain' => []
         ]);
@@ -64,12 +68,12 @@ class OrganizersController extends AppController
             $image = $this->request->data('image'); //recebe o valor do campo de upload (image)
             $extension = pathinfo($image['name'], PATHINFO_EXTENSION); //obtem a extensao do ficheiro
             $image['name'] = Text::uuid($image['name']).'.'.$extension; //transforma o nome em uma string
-            if(move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/uploads/' . $image['name'])){ //Verifica se o ficheiro foi movido com sucesso para outra pasta
+            if(move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/uploads/' . $image['name'])){ //Verifica se o ficheiro foi movido com sucesso 
                 $organizer = $this->Organizers->patchEntity($organizer, $this->request->data()); //preenche a entidade com os valores enviados
-                $organizer->image = 'uploads/' . $image['name']; //guarda o nome e caminho do ficheiro na patch entity
+                $organizer->image = 'uploads/' . $image['name']; //guarda o nome e caminho do ficheiro 
             }
             if ($this->Organizers->save($organizer)) {
-                $this->Flash->success(__('The organizer has been saved.'));
+                $this->Flash->success(__('Organizador salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -83,12 +87,13 @@ class OrganizersController extends AppController
 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->traducao();
+        $this->request->allowMethod(['post', 'delete']);//elemina nesta linha
         $organizer = $this->Organizers->get($id);
-        if ($this->Organizers->delete($organizer)) {
-            $this->Flash->success(__('The organizer has been deleted.'));
+        if ($this->Organizers->delete($organizer)) { //validação do delete
+            $this->Flash->success(__('Organizador eleminado com sucesso.'));
         } else {
-            $this->Flash->error(__('The organizer could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Impossivel eleminar organizador. Tente de novo.'));
         }
 
         return $this->redirect(['action' => 'index']);

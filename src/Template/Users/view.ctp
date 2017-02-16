@@ -1,9 +1,9 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editar User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('Novo User'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Editar Utilizador'), ['action' => 'edit', $user->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Utilizador'), ['action' => 'delete', $user->id], ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $user->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Novo Utilizador'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
@@ -34,4 +34,7 @@
             <td><?= h($user->modifeid) ?></td>
         </tr>
     </table>
+    <?php
+        echo $this->element('footer');
+    ?>
 </div>

@@ -2,7 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Novo Organizador'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Edit Organizador'), ['action' => 'edit', $organizer->id]) ?> </li>
+        <li><?= $this->Html->link(__('Editar Organizador'), ['action' => 'edit', $organizer->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Organizador'), ['action' => 'delete', $organizer->id], ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $organizer->id)]) ?> </li>
     </ul>
 </nav>
@@ -49,12 +49,15 @@
                 <td><?= h($events->organizer_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Events', 'action' => 'view', $events->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Events', 'action' => 'edit', $events->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Events', 'action' => 'delete', $events->id], ['confirm' => __('Are you sure you want to delete # {0}?', $events->id)]) ?>
+                    <?= $this->Html->link(__('Editar'), ['controller' => 'Events', 'action' => 'edit', $events->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Events', 'action' => 'delete', $events->id], ['confirm' => __('Tem a certeza que quer eleminar # {0}?', $events->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
+    <?php
+        echo $this->element('footer');
+    ?>
 </div>

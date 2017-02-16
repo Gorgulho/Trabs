@@ -38,4 +38,7 @@
             <td><?= h($event->validate) ?></td>
         </tr>
     </table>
+    <?php
+        echo $this->element('footer');
+    ?>
 </div>

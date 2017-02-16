@@ -34,4 +34,7 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+    <?php
+        echo $this->element('footer');
+    ?>
 </div>

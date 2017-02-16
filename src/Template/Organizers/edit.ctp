@@ -14,14 +14,17 @@
 <div class="organizers form large-9 medium-8 columns content">
     <?= $this->Form->create($organizer,['enctype'=>'multipart/form-data']) ?>
     <fieldset>
-        <legend><?= __('Edit Organizer') ?></legend>
+        <legend><?= __('Editar Organizador') ?></legend>
         <?php
             echo $this->Form->input('nome_organizador');
             echo $this->Form->input('nome_empresa');
-            echo $this->Form->input('image', ['type'=>'file', 'accept' => 'image/*'])
+            echo $this->Form->input('image', ['type'=>'file', 'accept' => 'image/*'])//input para as imagens
 
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+    <?php
+        echo $this->element('footer'); //a chmar um element
+    ?>
 </div>
